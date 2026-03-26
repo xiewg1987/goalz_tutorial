@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4fjabjnsggr4"]
+
+[ext_resource type="FontFile" uid="uid://csd6wwjc05l0s" path="res://assets/fonts/TinyUnicode.ttf" id="1_hyk8p"]
+[ext_resource type="Script" uid="uid://cpj8qfoqqsl" path="res://scenes/main/player_button.gd" id="2_iuonh"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_hyk8p")
+theme_override_font_sizes/font_size = 80
+text = "Goalz"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerButton" type="Button" parent="."]
+layout_mode = 0
+offset_top = 208.0
+offset_right = 180.0
+offset_bottom = 256.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_hyk8p")
+theme_override_font_sizes/font_size = 48
+text = "PLAY"
+flat = true
+script = ExtResource("2_iuonh")
+
+[connection signal="pressed" from="PlayerButton" to="PlayerButton" method="_on_pressed"]

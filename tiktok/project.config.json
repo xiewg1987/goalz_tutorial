@@ -1,0 +1,26 @@
+{
+  "appid": "testAppId",
+  "engineInfos": [
+    {
+      "name": "godot",
+      "version": "4.5.1"
+    }
+  ],
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "__MACOSX"
+      },
+      {
+        "type": "file",
+        "value": ".gdignore"
+      }
+    ],
+    "include": []
+  },
+  "projectname": "Goalz Tutorial",
+  "setting": {
+    "urlCheck": false
+  }
+}

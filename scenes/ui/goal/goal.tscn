@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx6v3c64l36ju"]
+
+[ext_resource type="Texture2D" uid="uid://rwf7olio6lh3" path="res://assets/sprites/Goal.png" id="1_tiwdc"]
+[ext_resource type="Script" uid="uid://jafglrkw8x2h" path="res://scenes/ui/goal/goal.gd" id="2_6hppj"]
+[ext_resource type="AudioStream" uid="uid://bayeiaaqjust3" path="res://assets/sounds/Goal.wav" id="3_cbybu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hppj"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_tiwdc"]
+resource_name = "spin"
+length = 3.0
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="Animation" id="Animation_6hppj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hppj"]
+_data = {
+&"RESET": SubResource("Animation_6hppj"),
+&"spin": SubResource("Animation_tiwdc")
+}
+
+[node name="Goal" type="Sprite2D"]
+texture = ExtResource("1_tiwdc")
+script = ExtResource("2_6hppj")
+
+[node name="GoalArea" type="Area2D" parent="." groups=["NotWall"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalArea"]
+shape = SubResource("RectangleShape2D_6hppj")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6hppj")
+}
+autoplay = "spin"
+
+[node name="GoalAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_cbybu")
+
+[connection signal="area_entered" from="GoalArea" to="." method="_on_goal_area_area_entered"]
